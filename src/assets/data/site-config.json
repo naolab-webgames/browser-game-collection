@@ -1,0 +1,32 @@
+{
+  "site": {
+    "title": "Free Browser Games Collection",
+    "description": "Play fun and casual games right in your browser. No downloads required!",
+    "version": "1.0.0",
+    "language": "en",
+    "author": "Your Name",
+    "keywords": [
+      "browser games",
+      "free games",
+      "casual games",
+      "online games"
+    ]
+  },
+  "features": {
+    "adsEnabled": true,
+    "soundEnabled": false,
+    "darkModeEnabled": false,
+    "responsiveEnabled": false
+  },
+  "ads": {
+    "provider": "Google AdSense",
+    "showOnTopPage": true,
+    "showBeforeGame": true,
+    "showAfterGame": true,
+    "skipDelay": 5
+  },
+  "storage": {
+    "provider": "localStorage",
+    "prefix": "bgc_"
+  }
+}
