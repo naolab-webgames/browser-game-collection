@@ -47,52 +47,70 @@ Webブラウザで遊べる複数のカジュアルゲームを提供するフ�
 ### 1.8 プロジェクトフォルダ構成
 ```
 browser-game-collection/
+├── index.html                     # トップページ（GitHub Pagesルート）
+├── games/                         # ゲーム画面HTML
+│   ├── memory-game.html
+│   ├── tic-tac-toe.html
+│   └── whack-a-mole.html
+├── src/
+│   ├── js/
+│   │   ├── core/                  # コアサービス（シングルトン）
+│   │   │   ├── StorageService.js  # LocalStorage抽象化
+│   │   │   ├── GameDataService.js # ゲームデータ操作
+│   │   │   ├── ConfigLoader.js    # JSON設定ローダー
+│   │   │   └── AdService.js       # 広告サービス（オプション）
+│   │   ├── controllers/           # アプリケーションコントローラー
+│   │   │   ├── TopPageController.js        # トップページ制御
+│   │   │   ├── GameController.js           # ゲーム基底クラス
+│   │   │   ├── MemoryGameController.js     # 神経衰弱
+│   │   │   ├── TicTacToeController.js      # ○×ゲーム
+│   │   │   └── WhackAMoleController.js     # もぐら叩き
+│   │   ├── ui/                    # UIコンポーネント
+│   │   │   ├── GameCard.js        # ゲームカード
+│   │   │   ├── Modal.js           # モーダルダイアログ
+│   │   │   ├── Timer.js           # タイマー
+│   │   │   └── Notification.js    # 通知
+│   │   └── utils/                 # ユーティリティ
+│   │       ├── validation.js      # バリデーション関数
+│   │       ├── helpers.js         # ヘルパー関数
+│   │       └── constants.js       # 定数定義
+│   ├── css/
+│   │   ├── common.css             # 共通スタイル
+│   │   ├── top-page.css           # トップページ
+│   │   ├── game-common.css        # ゲーム共通
+│   │   └── games/                 # ゲーム個別スタイル
+│   │       ├── memory-game.css
+│   │       ├── tic-tac-toe.css
+│   │       └── whack-a-mole.css
+│   └── assets/
+│       ├── images/
+│       │   └── thumbnails/        # ゲームサムネイル
+│       └── data/                  # 外部マスタデータ
+│           ├── games.json         # ゲーム一覧メタデータ
+│           └── site-config.json   # サイト設定
 ├── docs/                          # ドキュメント
-│   ├── requirements.md           # 全体要件定義書
-│   ├── design/                   # 設計書
-│   ├── review/                   # レビュー記録・指摘表
-│   └── games/                    # 各ゲームの要件定義書
-│       ├── memory-game.md        # 神経衰弱の要件定義
-│       ├── tic-tac-toe.md        # ○×ゲームの要件定義
-│       └── whack-a-mole.md       # もぐら叩きの要件定義
-├── src/                          # ソースコード
-│   ├── index.html                # トップページ
-│   ├── css/                      # スタイルシート
-│   │   ├── common.css           # 共通スタイル
-│   │   └── games/               # ゲーム個別スタイル
-│   ├── js/                       # JavaScript
-│   │   ├── common/              # 共通モジュール
-│   │   │   ├── storage.js       # LocalStorage管理
-│   │   │   ├── ads.js           # 広告管理
-│   │   │   └── utils.js         # ユーティリティ
-│   │   └── games/               # ゲーム個別ロジック
-│   │       ├── memory-game/     # 神経衰弱
-│   │       ├── tic-tac-toe/     # ○×ゲーム
-│   │       └── whack-a-mole/    # もぐら叩き
-│   ├── games/                    # ゲーム画面HTML
-│   │   ├── memory-game.html
-│   │   ├── tic-tac-toe.html
-│   │   └── whack-a-mole.html
-│   ├── assets/                   # 静的リソース
-│   │   ├── images/              # 画像
-│   │   │   ├── thumbnails/      # サムネイル
-│   │   │   └── games/           # ゲーム内画像
-│   │   └── data/                # 外部マスタデータ
-│   │       ├── games.json       # ゲーム一覧メタデータ
-│   │       └── site-config.json # サイト設定
-│   └── tests/                    # テストコード
-│       ├── common/
-│       └── games/
+│   ├── requirements.md            # 全体要件定義書
+│   ├── design/                    # 設計書
+│   │   ├── screen-design.md       # 画面設計
+│   │   ├── data-design.md         # データ設計
+│   │   └── module-design.md       # モジュール設計
+│   └── games/                     # 各ゲームの要件定義書
+│       ├── memory-game.md         # 神経衰弱の要件定義
+│       ├── tic-tac-toe.md         # ○×ゲームの要件定義
+│       └── whack-a-mole.md        # もぐら叩きの要件定義
 ├── README.md                      # プロジェクト説明
 └── .gitignore
 
 ```
 
 **フォルダ構成の設計方針**
-- ゲームごとに独立したファイル・フォルダで管理
-- 共通機能は`common/`配下で一元管理
-- ドキュメントもゲームごとに分離し、保守性を向上
-- 外部マスタは`assets/data/`で管理し、コードとデータを分離
+- **レイヤー化アーキテクチャ**: core（サービス層）、controllers（アプリケーション層）、ui（プレゼンテーション層）に分離
+- **ES6 Modules**: 各モジュールは独立したファイルとして管理、依存関係を明確化
+- **シングルトンパターン**: コアサービスはシングルトンで実装し、アプリ全体で共有
+- **継承による再利用**: GameControllerを基底クラスとし、各ゲームコントローラーが継承
+- **コンポーネント化**: UIは再利用可能なコンポーネントとして実装
+- **外部データ管理**: games.json、site-config.jsonで設定を外部化
+- **GitHub Pages対応**: index.htmlはルートに配置（GitHub Pagesの慣習）
 
 ---
 
