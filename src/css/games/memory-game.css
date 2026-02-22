@@ -1,0 +1,280 @@
+/**
+ * memory-game.css
+ * Memory Game specific styles
+ */
+
+/* ====================
+   Game Container
+   ==================== */
+
+.memory-game {
+  min-height: 100vh;
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ====================
+   Game Header
+   ==================== */
+
+.game-header {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+}
+
+.game-header h2 {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.game-stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-xl);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.game-stats span {
+  color: var(--color-text);
+}
+
+.game-stats span span {
+  color: var(--color-primary);
+  font-size: 24px;
+}
+
+/* ====================
+   Cards Grid (8×2)
+   ==================== */
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 16px;
+  max-width: 800px;
+  margin: 0 auto var(--spacing-xl);
+  padding: var(--spacing-lg);
+}
+
+/* ====================
+   Card Styles
+   ==================== */
+
+.card {
+  aspect-ratio: 1;
+  position: relative;
+  cursor: pointer;
+  perspective: 1000px;
+  transition: transform 0.1s ease;
+}
+
+.card:hover:not(.matched):not(.flipped) {
+  transform: scale(1.05);
+}
+
+.card:active {
+  transform: scale(0.98);
+}
+
+/* Card Inner Container */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Card Faces - Common styles */
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  font-size: 48px;
+  font-weight: 700;
+  transition: opacity 0.3s ease;
+}
+
+/* Back Face (question mark) - Shows by default */
+.card-back {
+  background: #3498db;
+  color: #ffffff;
+  font-size: 64px;
+  opacity: 1;
+}
+
+/* Front Face (number) - Hidden by default */
+.card-front {
+  background: #9b59b6;
+  color: #ffffff;
+  opacity: 0;
+}
+
+/* Flipped state - swap visibility */
+.card.flipped .card-back {
+  opacity: 0;
+}
+
+.card.flipped .card-front {
+  opacity: 1;
+}
+
+/* Card States */
+.card.matched {
+  pointer-events: none;
+}
+
+.card.matched .card-inner {
+  animation: matchPulse 0.5s ease;
+}
+
+.card.matched .card-front {
+  background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+  opacity: 0.7;
+}
+
+@keyframes matchPulse {
+  0%, 100% {
+    transform: rotateY(180deg) scale(1);
+  }
+  50% {
+    transform: rotateY(180deg) scale(1.1);
+  }
+}
+
+/* ====================
+   Game Controls
+   ==================== */
+
+.game-controls {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  margin-top: var(--spacing-lg);
+}
+
+/* ====================
+   Result Modal Specific
+   ==================== */
+
+.result-stats {
+  background-color: var(--color-background);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.stat-item:last-child {
+  border-bottom: none;
+}
+
+.stat-label {
+  font-size: 16px;
+  color: var(--color-text-light);
+  font-weight: 600;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.new-record {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  animation: recordPulse 1s ease infinite;
+}
+
+@keyframes recordPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* ====================
+   Ad Container
+   ==================== */
+
+.ad-container {
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background-color: var(--color-background);
+  border-radius: var(--radius-md);
+  text-align: center;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-light);
+}
+
+/* ====================
+   Responsive Design
+   ==================== */
+
+@media (max-width: 768px) {
+  .cards-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    max-width: 400px;
+    gap: 12px;
+  }
+
+  .card-front,
+  .card-back {
+    font-size: 32px;
+  }
+
+  .card-back {
+    font-size: 48px;
+  }
+
+  .game-stats {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .cards-grid {
+    gap: 8px;
+    padding: var(--spacing-md);
+  }
+
+  .card-front,
+  .card-back {
+    font-size: 24px;
+  }
+
+  .card-back {
+    font-size: 36px;
+  }
+}
