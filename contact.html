@@ -185,6 +185,7 @@
         <input type="hidden" name="_subject" value="New Contact Form Submission - Naolab Browser Games">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://naolab-webgames.github.io/browser-game-collection/contact.html?success=true">
 
         <div class="form-group">
           <label for="name">Your Name <span class="required">*</span></label>
@@ -281,5 +282,57 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // Show success message if redirected after form submission
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === 'true') {
+      // Create success message
+      const successDiv = document.createElement('div');
+      successDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #27ae60;
+        color: white;
+        padding: 16px 32px;
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        z-index: 10000;
+        font-size: 16px;
+        font-weight: 600;
+        animation: slideDown 0.3s ease;
+      `;
+      successDiv.textContent = '✓ Message sent successfully! We will get back to you soon.';
+      document.body.appendChild(successDiv);
+
+      // Add animation
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes slideDown {
+          from {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+          }
+        }
+      `;
+      document.head.appendChild(style);
+
+      // Remove success message after 5 seconds
+      setTimeout(() => {
+        successDiv.style.animation = 'slideDown 0.3s ease reverse';
+        setTimeout(() => {
+          successDiv.remove();
+          // Clean URL
+          window.history.replaceState({}, document.title, window.location.pathname);
+        }, 300);
+      }, 5000);
+    }
+  </script>
 </body>
 </html>
