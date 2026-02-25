@@ -26,7 +26,7 @@ class ConfigLoader {
     }
 
     try {
-      const response = await fetch('/src/assets/data/site-config.json');
+      const response = await fetch('/browser-game-collection/src/assets/data/site-config.json');
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -54,7 +54,7 @@ class ConfigLoader {
     }
 
     try {
-      const response = await fetch('/src/assets/data/games.json');
+      const response = await fetch('/browser-game-collection/src/assets/data/games.json');
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);

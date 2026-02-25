@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Whack-a-Mole - Naolab's Browser Games</title>
 
-  <link rel="stylesheet" href="/src/css/common.css">
-  <link rel="stylesheet" href="/src/css/games/whack-a-mole.css">
-  <link rel="stylesheet" href="/src/css/footer.css">
+  <link rel="stylesheet" href="/browser-game-collection/src/css/common.css">
+  <link rel="stylesheet" href="/browser-game-collection/src/css/games/whack-a-mole.css">
+  <link rel="stylesheet" href="/browser-game-collection/src/css/footer.css">
 </head>
 <body>
   <div class="whack-a-mole">
@@ -54,25 +54,25 @@
   <footer class="site-footer">
     <div class="footer-content">
       <nav class="footer-links">
-        <a href="/index-module.html">Home</a>
+        <a href="/browser-game-collection/index-module.html">Home</a>
         <span class="separator">|</span>
-        <a href="/about.html">About</a>
+        <a href="/browser-game-collection/about.html">About</a>
         <span class="separator">|</span>
-        <a href="/privacy-policy.html">Privacy Policy</a>
+        <a href="/browser-game-collection/privacy-policy.html">Privacy Policy</a>
         <span class="separator">|</span>
-        <a href="/terms-of-service.html">Terms of Service</a>
+        <a href="/browser-game-collection/terms-of-service.html">Terms of Service</a>
         <span class="separator">|</span>
-        <a href="/contact.html">Contact</a>
+        <a href="/browser-game-collection/contact.html">Contact</a>
       </nav>
       <div class="footer-copyright">
-        &copy; 2026 <a href="/index-module.html">Naolab Browser Game Collection</a> by Naoto Lab. All rights reserved.
+        &copy; 2026 <a href="/browser-game-collection/index-module.html">Naolab Browser Game Collection</a> by Naoto Lab. All rights reserved.
       </div>
     </div>
   </footer>
 
   <script type="module">
-    import WhackAMoleController from '/src/js/controllers/WhackAMoleController.js';
-    import { gameDataService } from '/src/js/core/GameDataService.js';
+    import WhackAMoleController from '/browser-game-collection/src/js/controllers/WhackAMoleController.js';
+    import { gameDataService } from '/browser-game-collection/src/js/core/GameDataService.js';
 
     const controller = new WhackAMoleController(gameDataService);
     controller.init();

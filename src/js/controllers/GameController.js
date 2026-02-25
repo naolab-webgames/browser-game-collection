@@ -160,9 +160,9 @@ export default class GameController {
   navigateToHome() {
     // If current page is a module version, navigate to module version of index
     if (window.location.pathname.includes('module.html')) {
-      window.location.href = '/index-module.html';
+      window.location.href = '/browser-game-collection/index-module.html';
     } else {
-      window.location.href = '/index.html';
+      window.location.href = '/browser-game-collection/index.html';
     }
   }
 
