@@ -4,33 +4,33 @@
       "id": "memory-game",
       "title": "Memory Game",
       "description": "Find matching pairs of cards by flipping them over. Test your memory!",
-      "thumbnail": "/assets/images/thumbnails/memory-game.png",
+      "thumbnail": "/src/assets/images/thumbnails/memory-game.svg",
       "difficulty": "easy",
       "estimatedTime": "1-2 minutes",
       "category": "puzzle",
-      "htmlPath": "/games/memory-game.html",
+      "htmlPath": "/games/memory-game-module.html",
       "enabled": true
     },
     {
       "id": "tic-tac-toe",
       "title": "Tic-Tac-Toe",
       "description": "Classic game of X's and O's. Get three in a row to win!",
-      "thumbnail": "/assets/images/thumbnails/tic-tac-toe.png",
+      "thumbnail": "/src/assets/images/thumbnails/tic-tac-toe.svg",
       "difficulty": "easy",
       "estimatedTime": "1 minute",
       "category": "strategy",
-      "htmlPath": "/games/tic-tac-toe.html",
+      "htmlPath": "/games/tic-tac-toe-module.html",
       "enabled": true
     },
     {
       "id": "whack-a-mole",
       "title": "Whack-a-Mole",
       "description": "Click on the moles as quickly as you can before time runs out!",
-      "thumbnail": "/assets/images/thumbnails/whack-a-mole.png",
+      "thumbnail": "/src/assets/images/thumbnails/whack-a-mole.svg",
       "difficulty": "easy",
       "estimatedTime": "1 minute",
       "category": "action",
-      "htmlPath": "/games/whack-a-mole.html",
+      "htmlPath": "/games/whack-a-mole-module.html",
       "enabled": true
     }
   ]

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="楽しいブラウザゲームのコレクション。ダウンロード不要で今すぐプレイ！">
+  <meta name="keywords" content="browser games, free games, casual games, memory game, tic-tac-toe, whack-a-mole">
+  <title>Naolab's Free Browser Games Collection</title>
+
+  <link rel="stylesheet" href="/src/css/common.css">
+  <link rel="stylesheet" href="/src/css/top-page.css">
+  <link rel="stylesheet" href="/src/css/footer.css">
+</head>
+<body class="top-page">
+  <!-- Header -->
+  <header class="header">
+    <div class="header__container">
+      <a href="/index-module.html" class="header__logo">
+        🎮 Browser Games
+      </a>
+      <nav class="header__nav">
+        <a href="/index-module.html">Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1 class="hero__title">Naolab's Free Browser Games Collection</h1>
+    <p class="hero__tagline">
+      Play fun and casual games right in your browser.<br>
+      No downloads required!
+    </p>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Advertisement Banner (Optional) -->
+    <div class="ad-container">
+      <p>Advertisement Space</p>
+    </div>
+
+    <!-- Games Section -->
+    <section class="games-section">
+      <h2 class="section-title">Available Games</h2>
+      <div class="games-grid" id="games-grid">
+        <!-- Game cards will be dynamically inserted here -->
+        <div class="loading">
+          <div class="loading__spinner"></div>
+          <p>Loading games...</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <nav class="footer-links">
+        <a href="/index-module.html">Home</a>
+        <span class="separator">|</span>
+        <a href="/about.html">About</a>
+        <span class="separator">|</span>
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <span class="separator">|</span>
+        <a href="/terms-of-service.html">Terms of Service</a>
+        <span class="separator">|</span>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <div class="footer-copyright">
+        &copy; 2026 <a href="/index-module.html">Naolab Browser Game Collection</a> by Naoto Lab. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script type="module">
+    import TopPageController from '/src/js/controllers/TopPageController.js';
+
+    // Initialize controller when DOM is ready
+    const controller = new TopPageController();
+    controller.init();
+  </script>
+</body>
+</html>

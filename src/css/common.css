@@ -294,7 +294,8 @@ button:disabled:hover, .btn:disabled:hover {
   padding: 0 var(--spacing-md);
 }
 
-.card {
+/* Generic card component (not for game cards) */
+.ui-card {
   background-color: var(--color-surface);
   border-radius: var(--radius-md);
   padding: var(--spacing-lg);
@@ -302,7 +303,7 @@ button:disabled:hover, .btn:disabled:hover {
   transition: box-shadow var(--transition-fast);
 }
 
-.card:hover {
+.ui-card:hover {
   box-shadow: var(--shadow-md);
 }
 

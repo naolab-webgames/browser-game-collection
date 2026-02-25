@@ -1,13 +1,13 @@
 /**
- * memory-game.css
- * Memory Game specific styles
+ * whack-a-mole.css
+ * Whack-a-Mole game specific styles
  */
 
 /* ====================
    Game Container
    ==================== */
 
-.memory-game {
+.whack-a-mole {
   min-height: 100vh;
   padding: var(--spacing-lg);
   display: flex;
@@ -22,7 +22,7 @@
 
 .game-header {
   width: 100%;
-  max-width: 800px;
+  max-width: 600px;
   margin-bottom: var(--spacing-xl);
   text-align: center;
 }
@@ -40,117 +40,160 @@
   font-weight: 600;
 }
 
-.game-stats span {
-  color: var(--color-text);
+.game-stats > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
 }
 
-.game-stats span span {
+.game-stats span:first-child {
+  color: var(--color-text-light);
+  font-size: 14px;
+}
+
+.game-stats span:last-child {
   color: var(--color-primary);
-  font-size: 24px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* Timer color states */
+.timer span:last-child {
+  color: #27ae60;  /* Green: normal */
+  transition: color 0.3s ease;
+}
+
+.timer span.warning {
+  color: #f39c12;  /* Orange: warning (6-10s) */
+}
+
+.timer span.critical {
+  color: #e74c3c;  /* Red: critical (1-5s) */
+  animation: pulse 0.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
 }
 
 /* ====================
-   Cards Grid (8×2)
+   Holes Grid (3×3)
    ==================== */
 
-.cards-grid {
+.holes-grid {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 24px;
   width: 100%;
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto var(--spacing-xl);
   padding: var(--spacing-lg);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
 }
 
 /* ====================
-   Card Styles
+   Hole & Mole Styles
    ==================== */
 
-.memory-card {
+.hole {
   aspect-ratio: 1;
+  background: #8b4513;  /* Brown */
+  border-radius: 50%;
   position: relative;
   cursor: pointer;
-  perspective: 1000px;
+  overflow: hidden;
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3);
   transition: transform 0.1s ease;
 }
 
-.memory-card:hover:not(.matched):not(.flipped) {
-  transform: scale(1.05);
+.hole:hover {
+  transform: scale(1.02);
 }
 
-.memory-card:active {
-  transform: scale(0.98);
+.hole:active {
+  transform: scale(0.95);
 }
 
-/* Card Inner Container */
-.memory-card .card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-/* Card Faces - Common styles */
-.memory-card .card-front,
-.memory-card .card-back {
+/* Mole element */
+.mole {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  font-size: 48px;
-  font-weight: 700;
-  transition: opacity 0.3s ease;
+  bottom: -100%;  /* Hidden by default */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 60%;
+  background: #6d4c41;  /* Dark brown */
+  border-radius: 50%;
+  transition: bottom 0.2s ease;
 }
 
-/* Back Face (question mark) - Shows by default */
-.memory-card .card-back {
-  background: #3498db;
-  color: #ffffff;
-  font-size: 64px;
-  opacity: 1;
+/* Mole visible state */
+.hole.active .mole {
+  bottom: 20%;  /* Mole pops up */
 }
 
-/* Front Face (number) - Hidden by default */
-.memory-card .card-front {
-  background: #9b59b6;
-  color: #ffffff;
-  opacity: 0;
+/* Mole face (eyes) */
+.mole::before,
+.mole::after {
+  content: '';
+  position: absolute;
+  top: 30%;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
 }
 
-/* Flipped state - swap visibility */
-.memory-card.flipped .card-back {
-  opacity: 0;
+.mole::before {
+  left: 30%;
 }
 
-.memory-card.flipped .card-front {
-  opacity: 1;
+.mole::after {
+  right: 30%;
 }
 
-/* Card States */
-.memory-card.matched {
-  pointer-events: none;
+/* Hit feedback animation */
+.hole.hit {
+  animation: hitFlash 0.2s ease;
 }
 
-.memory-card.matched .card-inner {
-  animation: matchPulse 0.5s ease;
-}
-
-.memory-card.matched .card-front {
-  background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
-  opacity: 0.7;
-}
-
-@keyframes matchPulse {
+@keyframes hitFlash {
   0%, 100% {
-    transform: scale(1);
+    background: #8b4513;
   }
   50% {
-    transform: scale(1.1);
+    background: #27ae60;  /* Green flash */
+  }
+}
+
+/* Hit text animation */
+.hit-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  font-weight: 700;
+  color: #27ae60;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  animation: hitAnimation 0.6s ease-out forwards;
+  z-index: 10;
+}
+
+@keyframes hitAnimation {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -120%) scale(1.5);
   }
 }
 
@@ -182,11 +225,18 @@
   border: 2px solid var(--color-primary);
 }
 
-.game-controls button:first-child:hover {
+.game-controls button:first-child:hover:not(:disabled) {
   background-color: var(--color-primary-dark);
   border-color: var(--color-primary-dark);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
+}
+
+.game-controls button:first-child:disabled {
+  background-color: #95a5a6;
+  border-color: #95a5a6;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 .game-controls button:last-child {
@@ -258,10 +308,7 @@
   }
 }
 
-/* ====================
-   Ad Container
-   ==================== */
-
+/* Ad Container */
 .ad-container {
   margin-top: var(--spacing-lg);
   padding: var(--spacing-md);
@@ -280,40 +327,37 @@
    ==================== */
 
 @media (max-width: 768px) {
-  .cards-grid {
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    max-width: 400px;
-    gap: 12px;
-  }
-
-  .memory-card .card-front,
-  .memory-card .card-back {
-    font-size: 32px;
-  }
-
-  .memory-card .card-back {
-    font-size: 48px;
+  .holes-grid {
+    max-width: 450px;
+    gap: 20px;
   }
 
   .game-stats {
     flex-direction: column;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-md);
+  }
+
+  .mole::before,
+  .mole::after {
+    width: 6px;
+    height: 6px;
   }
 }
 
 @media (max-width: 480px) {
-  .cards-grid {
-    gap: 8px;
+  .holes-grid {
+    max-width: 350px;
+    gap: 16px;
     padding: var(--spacing-md);
   }
 
-  .memory-card .card-front,
-  .memory-card .card-back {
+  .game-stats span:last-child {
     font-size: 24px;
   }
 
-  .memory-card .card-back {
-    font-size: 36px;
+  .mole::before,
+  .mole::after {
+    width: 5px;
+    height: 5px;
   }
 }

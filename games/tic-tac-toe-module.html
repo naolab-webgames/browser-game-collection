@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic-Tac-Toe - Naolab's Browser Games</title>
+
+  <link rel="stylesheet" href="/src/css/common.css">
+  <link rel="stylesheet" href="/src/css/games/tic-tac-toe.css">
+  <link rel="stylesheet" href="/src/css/footer.css">
+</head>
+<body>
+  <div class="tic-tac-toe">
+    <header class="game-header">
+      <h2>Tic-Tac-Toe</h2>
+      <div class="game-stats" id="stats-display">
+        <div class="stat">W: <span id="wins">0</span></div>
+        <div class="stat">L: <span id="losses">0</span></div>
+        <div class="stat">D: <span id="draws">0</span></div>
+      </div>
+    </header>
+
+    <!-- Symbol selection -->
+    <div id="symbol-selection" class="symbol-selection">
+      <h3>Choose Your Symbol</h3>
+      <div class="symbol-buttons">
+        <button class="symbol-btn" data-symbol="X">X (Play First)</button>
+        <button class="symbol-btn" data-symbol="O">O (Play Second)</button>
+      </div>
+    </div>
+
+    <!-- Game board -->
+    <div class="board-grid" id="board-grid">
+      <div class="cell" data-index="0"></div>
+      <div class="cell" data-index="1"></div>
+      <div class="cell" data-index="2"></div>
+      <div class="cell" data-index="3"></div>
+      <div class="cell" data-index="4"></div>
+      <div class="cell" data-index="5"></div>
+      <div class="cell" data-index="6"></div>
+      <div class="cell" data-index="7"></div>
+      <div class="cell" data-index="8"></div>
+    </div>
+
+    <!-- Game message -->
+    <div class="game-message">
+      <p id="message-display">Choose your symbol to start!</p>
+    </div>
+
+    <!-- Game controls -->
+    <div class="game-controls">
+      <button id="reset-btn">New Game</button>
+      <button id="back-btn">Back to Home</button>
+    </div>
+  </div>
+
+  <!-- Result modal -->
+  <div id="result-modal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <h2 class="modal-title">Game Over!</h2>
+      <div class="modal-body"></div>
+      <div class="modal-buttons"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <nav class="footer-links">
+        <a href="/index-module.html">Home</a>
+        <span class="separator">|</span>
+        <a href="/about.html">About</a>
+        <span class="separator">|</span>
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <span class="separator">|</span>
+        <a href="/terms-of-service.html">Terms of Service</a>
+        <span class="separator">|</span>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <div class="footer-copyright">
+        &copy; 2026 <a href="/index-module.html">Naolab Browser Game Collection</a> by Naoto Lab. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import TicTacToeController from '/src/js/controllers/TicTacToeController.js';
+    import { gameDataService } from '/src/js/core/GameDataService.js';
+
+    const controller = new TicTacToeController(gameDataService);
+    controller.init();
+  </script>
+</body>
+</html>

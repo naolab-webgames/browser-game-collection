@@ -19,6 +19,7 @@
     }
 
     .memory-game {
+      width: 100%;
       max-width: 900px;
       margin: 0 auto;
     }
@@ -52,28 +53,29 @@
       grid-template-columns: repeat(8, 1fr);
       grid-template-rows: repeat(2, 1fr);
       gap: 16px;
+      width: 100%;
       max-width: 800px;
       margin: 0 auto 30px;
     }
 
-    .card {
+    .memory-card {
       aspect-ratio: 1;
       cursor: pointer;
       position: relative;
     }
 
-    .card:hover {
+    .memory-card:hover {
       transform: scale(1.05);
     }
 
-    .card-inner {
+    .memory-card .card-inner {
       position: relative;
       width: 100%;
       height: 100%;
     }
 
-    .card-front,
-    .card-back {
+    .memory-card .card-front,
+    .memory-card .card-back {
       position: absolute;
       width: 100%;
       height: 100%;
@@ -87,33 +89,33 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
-    .card-back {
+    .memory-card .card-back {
       background-color: #3498db;
       color: white;
       font-size: 64px;
       opacity: 1;
     }
 
-    .card-front {
+    .memory-card .card-front {
       background-color: #9b59b6;
       color: white;
       opacity: 0;
     }
 
-    .card.flipped .card-back {
+    .memory-card.flipped .card-back {
       opacity: 0;
     }
 
-    .card.flipped .card-front {
+    .memory-card.flipped .card-front {
       opacity: 1;
     }
 
-    .card.matched .card-front {
+    .memory-card.matched .card-front {
       background-color: #27ae60;
       opacity: 1;
     }
 
-    .card.matched .card-back {
+    .memory-card.matched .card-back {
       opacity: 0;
     }
 
@@ -248,10 +250,551 @@
     </div>
   </div>
 
-  <script type="module">
-    import MemoryGameController from '../src/js/controllers/MemoryGameController.js';
-    import { gameDataService } from '../src/js/core/GameDataService.js';
+  <script>
+    // ====================================
+    // StorageService (Inline)
+    // ====================================
+    class StorageService {
+      constructor(prefix = 'bgc_') {
+        this.prefix = prefix;
+        this.available = this.checkAvailability();
+      }
 
+      checkAvailability() {
+        try {
+          const test = '__storage_test__';
+          localStorage.setItem(test, test);
+          localStorage.removeItem(test);
+          return true;
+        } catch (e) {
+          console.warn('LocalStorage not available:', e);
+          return false;
+        }
+      }
+
+      save(key, value) {
+        if (!this.available) return false;
+
+        try {
+          const prefixedKey = this.prefix + key;
+          const serialized = JSON.stringify(value);
+          localStorage.setItem(prefixedKey, serialized);
+          return true;
+        } catch (error) {
+          console.error('Failed to save to storage:', error);
+          return false;
+        }
+      }
+
+      load(key, defaultValue = null) {
+        if (!this.available) return defaultValue;
+
+        try {
+          const prefixedKey = this.prefix + key;
+          const item = localStorage.getItem(prefixedKey);
+
+          if (item === null) {
+            return defaultValue;
+          }
+
+          return JSON.parse(item);
+        } catch (error) {
+          console.error('Failed to load from storage:', error);
+          return defaultValue;
+        }
+      }
+
+      loadNumber(key, defaultValue = 0) {
+        const value = this.load(key, defaultValue);
+        const num = Number(value);
+        return isNaN(num) ? defaultValue : num;
+      }
+
+      remove(key) {
+        if (!this.available) return false;
+
+        try {
+          const prefixedKey = this.prefix + key;
+          localStorage.removeItem(prefixedKey);
+          return true;
+        } catch (error) {
+          console.error('Failed to remove from storage:', error);
+          return false;
+        }
+      }
+
+      clearAll() {
+        if (!this.available) return false;
+
+        try {
+          const keys = Object.keys(localStorage);
+          keys.forEach(key => {
+            if (key.startsWith(this.prefix)) {
+              localStorage.removeItem(key);
+            }
+          });
+          return true;
+        } catch (error) {
+          console.error('Failed to clear storage:', error);
+          return false;
+        }
+      }
+
+      isAvailable() {
+        return this.available;
+      }
+    }
+
+    const storageService = new StorageService('bgc_');
+
+    // ====================================
+    // GameDataService (Inline)
+    // ====================================
+    class GameDataService {
+      constructor(storage) {
+        this.storage = storage;
+      }
+
+      saveMemoryGameScore(moves) {
+        const currentBest = this.loadMemoryGameHighScore();
+
+        if (currentBest === null || moves < currentBest) {
+          this.storage.save('memory-game_highscore', moves);
+          return true;
+        }
+
+        return false;
+      }
+
+      loadMemoryGameHighScore() {
+        const score = this.storage.load('memory-game_highscore', null);
+        return score === null ? null : Number(score);
+      }
+    }
+
+    const gameDataService = new GameDataService(storageService);
+
+    // ====================================
+    // Helpers (Inline)
+    // ====================================
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // ====================================
+    // Modal (Inline)
+    // ====================================
+    class Modal {
+      constructor(id) {
+        this.id = id;
+        this.modalElement = document.getElementById(id);
+
+        if (!this.modalElement) {
+          console.warn(`Modal element with ID "${id}" not found.`);
+          this.create();
+        }
+      }
+
+      show(title, content, buttons = []) {
+        if (!this.modalElement) {
+          console.error('Modal element not available');
+          return;
+        }
+
+        const titleElement = this.modalElement.querySelector('.modal-title');
+        if (titleElement) {
+          titleElement.textContent = title;
+        }
+
+        const contentElement = this.modalElement.querySelector('.modal-body');
+        if (contentElement) {
+          if (typeof content === 'string') {
+            contentElement.innerHTML = content;
+          } else if (content instanceof HTMLElement) {
+            contentElement.innerHTML = '';
+            contentElement.appendChild(content);
+          }
+        }
+
+        const buttonsContainer = this.modalElement.querySelector('.modal-buttons');
+        if (buttonsContainer && buttons.length > 0) {
+          buttonsContainer.innerHTML = '';
+
+          buttons.forEach(buttonConfig => {
+            const button = document.createElement('button');
+            button.textContent = buttonConfig.label;
+
+            button.addEventListener('click', () => {
+              if (buttonConfig.onClick) {
+                buttonConfig.onClick();
+              }
+            });
+
+            buttonsContainer.appendChild(button);
+          });
+        }
+
+        this.modalElement.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+
+      hide() {
+        if (!this.modalElement) {
+          return;
+        }
+
+        this.modalElement.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      create() {
+        const modal = document.createElement('div');
+        modal.id = this.id;
+        modal.className = 'modal hidden';
+        modal.innerHTML = `
+          <div class="modal-overlay"></div>
+          <div class="modal-content">
+            <h2 class="modal-title"></h2>
+            <div class="modal-body"></div>
+            <div class="modal-buttons"></div>
+          </div>
+        `;
+
+        document.body.appendChild(modal);
+        this.modalElement = modal;
+
+        const overlay = modal.querySelector('.modal-overlay');
+        overlay.addEventListener('click', () => this.hide());
+      }
+    }
+
+    // ====================================
+    // GameController (Base Class)
+    // ====================================
+    class GameController {
+      constructor(gameId, gameDataService) {
+        if (this.constructor === GameController) {
+          throw new Error('GameController is an abstract class');
+        }
+
+        this.gameId = gameId;
+        this.gameDataService = gameDataService;
+        this.resultModal = null;
+      }
+
+      async init() {
+        throw new Error('init() must be implemented by subclass');
+      }
+
+      startGame() {
+        throw new Error('startGame() must be implemented by subclass');
+      }
+
+      endGame() {
+        throw new Error('endGame() must be implemented by subclass');
+      }
+
+      resetGame() {
+        throw new Error('resetGame() must be implemented by subclass');
+      }
+
+      showResultModal(result) {
+        if (!this.resultModal) {
+          this.resultModal = new Modal('result-modal');
+        }
+
+        const content = this.buildModalContent(result);
+        const buttons = this.buildModalButtons();
+
+        this.resultModal.show('Game Over!', content, buttons);
+      }
+
+      buildModalContent(result) {
+        let html = '<div class="result-stats">';
+
+        if (result.message) {
+          html += `<p style="text-align:center;margin-bottom:10px;">${result.message}</p>`;
+        }
+
+        if (result.score !== undefined) {
+          html += `
+            <div class="stat-item">
+              <span class="stat-label">Your Score:</span>
+              <span class="stat-value">${result.score}</span>
+            </div>
+          `;
+        }
+
+        if (result.highScore !== undefined && result.highScore !== null) {
+          html += `
+            <div class="stat-item">
+              <span class="stat-label">Best Score:</span>
+              <span class="stat-value">${result.highScore}</span>
+            </div>
+          `;
+        }
+
+        html += '</div>';
+
+        if (result.isNewRecord) {
+          html = '<div class="new-record">⭐ NEW RECORD! ⭐</div>' + html;
+        }
+
+        return html;
+      }
+
+      buildModalButtons() {
+        return [
+          {
+            label: 'Play Again',
+            onClick: () => {
+              this.resultModal.hide();
+              this.resetGame();
+            }
+          },
+          {
+            label: 'Back to Home',
+            onClick: () => this.navigateToHome()
+          }
+        ];
+      }
+
+      navigateToHome() {
+        window.location.href = '../index.html';
+      }
+
+      setupCommonListeners() {
+        const backBtn = document.getElementById('back-btn');
+        if (backBtn) {
+          backBtn.addEventListener('click', () => this.navigateToHome());
+        }
+
+        const resetBtn = document.getElementById('reset-btn');
+        if (resetBtn) {
+          resetBtn.addEventListener('click', () => this.resetGame());
+        }
+      }
+    }
+
+    // ====================================
+    // MemoryGameController
+    // ====================================
+    class MemoryGameController extends GameController {
+      constructor(gameDataService) {
+        super('memory-game', gameDataService);
+
+        this.state = {
+          cards: [],
+          flippedIndices: [],
+          matchedIndices: [],
+          moves: 0,
+          isLocked: false,
+          gameStarted: false,
+          gameComplete: false,
+          highScore: null,
+          cardElements: [],
+          movesDisplay: null,
+          highScoreDisplay: null
+        };
+      }
+
+      async init() {
+        this.state.highScore = this.gameDataService.loadMemoryGameHighScore();
+
+        this.state.movesDisplay = document.getElementById('moves-value');
+        this.state.highScoreDisplay = document.getElementById('high-score-value');
+
+        this.updateMovesDisplay();
+        this.updateHighScoreDisplay();
+
+        this.setupCommonListeners();
+
+        this.startGame();
+      }
+
+      startGame() {
+        this.state.cards = [];
+        for (let i = 1; i <= 8; i++) {
+          this.state.cards.push(i, i);
+        }
+
+        shuffleArray(this.state.cards);
+
+        this.state.flippedIndices = [];
+        this.state.matchedIndices = [];
+        this.state.moves = 0;
+        this.state.isLocked = false;
+        this.state.gameStarted = false;
+        this.state.gameComplete = false;
+
+        this.updateMovesDisplay();
+
+        this.renderCards();
+      }
+
+      resetGame() {
+        this.startGame();
+      }
+
+      endGame() {
+        this.state.gameComplete = true;
+      }
+
+      renderCards() {
+        const gridContainer = document.getElementById('cards-grid');
+        if (!gridContainer) {
+          console.error('Cards grid container not found');
+          return;
+        }
+
+        gridContainer.innerHTML = '';
+        this.state.cardElements = [];
+
+        this.state.cards.forEach((value, index) => {
+          const card = this.createCardElement(value, index);
+          gridContainer.appendChild(card);
+          this.state.cardElements.push(card);
+        });
+      }
+
+      createCardElement(value, index) {
+        const card = document.createElement('div');
+        card.className = 'memory-card';
+        card.dataset.index = index;
+        card.dataset.value = value;
+
+        card.innerHTML = `
+          <div class="card-inner">
+            <div class="card-back">?</div>
+            <div class="card-front">${value}</div>
+          </div>
+        `;
+
+        card.addEventListener('click', () => this.handleCardClick(index));
+
+        return card;
+      }
+
+      handleCardClick(index) {
+        if (this.state.isLocked) return;
+        if (this.state.flippedIndices.includes(index)) return;
+        if (this.state.matchedIndices.includes(index)) return;
+
+        if (!this.state.gameStarted) {
+          this.state.gameStarted = true;
+        }
+
+        this.flipCard(index);
+        this.state.flippedIndices.push(index);
+
+        if (this.state.flippedIndices.length === 2) {
+          this.state.moves++;
+          this.updateMovesDisplay();
+
+          const [index1, index2] = this.state.flippedIndices;
+          const isMatch = this.state.cards[index1] === this.state.cards[index2];
+
+          if (isMatch) {
+            this.handleMatch();
+          } else {
+            this.handleMismatch();
+          }
+        }
+      }
+
+      handleMatch() {
+        const [index1, index2] = this.state.flippedIndices;
+
+        this.state.matchedIndices.push(index1, index2);
+
+        this.state.cardElements[index1].classList.add('matched');
+        this.state.cardElements[index2].classList.add('matched');
+
+        this.state.flippedIndices = [];
+
+        if (this.isGameComplete()) {
+          setTimeout(() => this.handleGameComplete(), 500);
+        }
+      }
+
+      handleMismatch() {
+        const [index1, index2] = this.state.flippedIndices;
+
+        this.state.isLocked = true;
+
+        setTimeout(() => {
+          this.unflipCard(index1);
+          this.unflipCard(index2);
+
+          this.state.flippedIndices = [];
+
+          this.state.isLocked = false;
+        }, 1000);
+      }
+
+      handleGameComplete() {
+        this.state.gameComplete = true;
+
+        const isNewRecord = this.checkAndSaveHighScore();
+
+        this.showResultModal({
+          score: this.state.moves,
+          highScore: this.state.highScore,
+          isNewRecord: isNewRecord,
+          message: `Congratulations! You completed the game in ${this.state.moves} moves.`
+        });
+      }
+
+      checkAndSaveHighScore() {
+        const isNewRecord = this.gameDataService.saveMemoryGameScore(this.state.moves);
+
+        if (isNewRecord) {
+          this.state.highScore = this.state.moves;
+          this.updateHighScoreDisplay();
+        }
+
+        return isNewRecord;
+      }
+
+      isGameComplete() {
+        return this.state.matchedIndices.length === 16;
+      }
+
+      flipCard(index) {
+        const card = this.state.cardElements[index];
+        if (card) {
+          card.classList.add('flipped');
+        }
+      }
+
+      unflipCard(index) {
+        const card = this.state.cardElements[index];
+        if (card) {
+          card.classList.remove('flipped');
+        }
+      }
+
+      updateMovesDisplay() {
+        if (this.state.movesDisplay) {
+          this.state.movesDisplay.textContent = this.state.moves;
+        }
+      }
+
+      updateHighScoreDisplay() {
+        if (this.state.highScoreDisplay) {
+          this.state.highScoreDisplay.textContent =
+            this.state.highScore !== null ? this.state.highScore : '--';
+        }
+      }
+    }
+
+    // ====================================
+    // Initialize Game
+    // ====================================
     const controller = new MemoryGameController(gameDataService);
     controller.init();
   </script>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About Naolab Browser Game Collection - Learn about our mission, games, and the team behind the fun.">
+  <title>About - Naolab Browser Game Collection</title>
+
+  <link rel="stylesheet" href="/src/css/common.css">
+  <link rel="stylesheet" href="/src/css/footer.css">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .legal-page {
+      flex: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--spacing-xl) var(--spacing-lg);
+      width: 100%;
+    }
+
+    .legal-page h1 {
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-md);
+      font-size: 32px;
+    }
+
+    .legal-page h2 {
+      color: var(--color-text);
+      margin-top: var(--spacing-xl);
+      margin-bottom: var(--spacing-md);
+      font-size: 24px;
+    }
+
+    .legal-page p, .legal-page li {
+      line-height: 1.8;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .legal-page ul {
+      padding-left: var(--spacing-xl);
+    }
+
+    .legal-page a {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    .legal-page a:hover {
+      color: var(--color-primary-dark);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: var(--spacing-lg);
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      margin: var(--spacing-xl) 0;
+      text-align: center;
+    }
+
+    .highlight-box h2 {
+      color: white;
+      margin-top: 0;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-lg);
+      margin: var(--spacing-xl) 0;
+    }
+
+    .game-item {
+      background-color: var(--color-surface);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .game-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .game-item h3 {
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-sm);
+      font-size: 20px;
+    }
+
+    .game-item p {
+      color: var(--color-text);
+      margin-bottom: 0;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <main class="legal-page">
+    <a href="/index-module.html" class="back-link">← Back to Home</a>
+
+    <h1>About Naolab Browser Game Collection</h1>
+
+    <div class="highlight-box">
+      <h2>Our Mission</h2>
+      <p style="font-size: 18px; line-height: 1.6; margin: 0;">
+        To provide fun, accessible, and engaging browser-based games that anyone can enjoy
+        instantly without downloads or installations. We believe gaming should be simple,
+        enjoyable, and available to everyone.
+      </p>
+    </div>
+
+    <h2>What We Offer</h2>
+    <p>
+      Naolab Browser Game Collection is a curated selection of classic and casual browser games
+      built with modern web technologies. All our games run directly in your browser, require
+      no registration, and respect your privacy by storing data locally on your device.
+    </p>
+
+    <h2>Our Games</h2>
+    <p>
+      We currently offer three carefully crafted games, each designed to provide quick entertainment
+      and mental stimulation:
+    </p>
+
+    <div class="game-grid">
+      <div class="game-item">
+        <h3>Memory Game</h3>
+        <p>
+          Test your memory by matching pairs of cards. Challenge yourself to complete the game
+          in the fewest moves possible. Features an 8×2 grid with smooth flip animations.
+        </p>
+      </div>
+
+      <div class="game-item">
+        <h3>Tic-Tac-Toe</h3>
+        <p>
+          The timeless classic of X's and O's. Play against an intelligent CPU opponent with
+          medium difficulty. Track your wins, losses, and draws over time.
+        </p>
+      </div>
+
+      <div class="game-item">
+        <h3>Whack-a-Mole</h3>
+        <p>
+          Test your reflexes in this fast-paced arcade game. Click on moles as they pop up
+          within 30 seconds. Beat your high score and improve your reaction time!
+        </p>
+      </div>
+    </div>
+
+    <h2>Technology</h2>
+    <p>
+      Our games are built using modern web standards:
+    </p>
+    <ul>
+      <li><strong>HTML5:</strong> Semantic markup for accessibility</li>
+      <li><strong>CSS3:</strong> Responsive design with smooth animations</li>
+      <li><strong>JavaScript:</strong> Modern, modular code architecture</li>
+      <li><strong>LocalStorage:</strong> Client-side data persistence for game progress</li>
+    </ul>
+    <p>
+      All games are optimized for both desktop and mobile devices, ensuring a seamless
+      experience across all platforms.
+    </p>
+
+    <h2>Privacy & Data</h2>
+    <p>
+      We take your privacy seriously. Our games:
+    </p>
+    <ul>
+      <li>Store game data locally on your device using browser LocalStorage</li>
+      <li>Do not collect or transmit personal information</li>
+      <li>Do not require registration or login</li>
+      <li>Use Google AdSense for non-intrusive advertisements</li>
+    </ul>
+    <p>
+      For detailed information, please read our <a href="/privacy-policy.html">Privacy Policy</a>.
+    </p>
+
+    <h2>About the Developer</h2>
+    <p>
+      Naolab Browser Game Collection is developed and maintained by <strong>Naoto Lab</strong>,
+      a passionate team dedicated to creating quality web experiences. We focus on simplicity,
+      performance, and user enjoyment.
+    </p>
+
+    <h2>Launch Date</h2>
+    <p>
+      This website launched in <strong>February 2026</strong> with the goal of bringing
+      classic gaming experiences to modern browsers.
+    </p>
+
+    <h2>Future Plans</h2>
+    <p>
+      We're continuously working to improve our existing games and add new ones. Some ideas
+      we're exploring include:
+    </p>
+    <ul>
+      <li>Additional classic games (Snake, Tetris, Breakout)</li>
+      <li>Leaderboards and achievements</li>
+      <li>Multiplayer game modes</li>
+      <li>Customizable themes and difficulty levels</li>
+    </ul>
+
+    <h2>Feedback & Suggestions</h2>
+    <p>
+      We'd love to hear from you! If you have feedback, bug reports, or suggestions for
+      new games, please visit our <a href="/contact.html">Contact</a> page.
+    </p>
+
+    <p style="margin-top: var(--spacing-xl); font-size: 18px; color: var(--color-primary); font-weight: 600;">
+      Thank you for playing our games! 🎮
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <nav class="footer-links">
+        <a href="/index-module.html">Home</a>
+        <span class="separator">|</span>
+        <a href="/about.html">About</a>
+        <span class="separator">|</span>
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <span class="separator">|</span>
+        <a href="/terms-of-service.html">Terms of Service</a>
+        <span class="separator">|</span>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <div class="footer-copyright">
+        &copy; 2026 <a href="/index-module.html">Naolab Browser Game Collection</a> by Naoto Lab. All rights reserved.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

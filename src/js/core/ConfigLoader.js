@@ -45,7 +45,7 @@ class ConfigLoader {
 
   /**
    * Load games metadata
-   * @returns {Promise<Array>} Array of enabled games
+   * @returns {Promise<object>} Games data object with games array
    */
   async loadGamesData() {
     // Return cached if available
@@ -62,15 +62,13 @@ class ConfigLoader {
 
       const data = await response.json();
 
-      // Filter for enabled games only
-      const enabledGames = data.games.filter(game => game.enabled === true);
-
-      this.cache.gamesData = enabledGames;
-      return enabledGames;
+      // Cache and return the data object
+      this.cache.gamesData = data;
+      return data;
     } catch (error) {
       console.error('Failed to load games data:', error);
       this.showWarning('Failed to load games list. Please refresh the page.');
-      return [];
+      return { games: [] };
     }
   }
 
@@ -81,7 +79,7 @@ class ConfigLoader {
   getDefaultSiteConfig() {
     return {
       site: {
-        title: 'Free Browser Games Collection',
+        title: 'Naolab\'s Free Browser Games Collection',
         description: 'Play fun and casual games right in your browser',
         version: '1.0.0',
         language: 'en',

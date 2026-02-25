@@ -158,7 +158,12 @@ export default class GameController {
    * Navigate to home page
    */
   navigateToHome() {
-    window.location.href = '/index.html';
+    // If current page is a module version, navigate to module version of index
+    if (window.location.pathname.includes('module.html')) {
+      window.location.href = '/index-module.html';
+    } else {
+      window.location.href = '/index.html';
+    }
   }
 
   /**

@@ -1,0 +1,311 @@
+/**
+ * tic-tac-toe.css
+ * Tic-Tac-Toe game specific styles
+ */
+
+/* ====================
+   Game Container
+   ==================== */
+
+.tic-tac-toe {
+  min-height: 100vh;
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* ====================
+   Game Header
+   ==================== */
+
+.game-header {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+}
+
+.game-header h2 {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.game-stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.game-stats .stat {
+  color: var(--color-text);
+}
+
+/* ====================
+   Symbol Selection
+   ==================== */
+
+.symbol-selection {
+  background-color: var(--color-surface);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.symbol-selection h3 {
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-text);
+}
+
+.symbol-buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+}
+
+.symbol-btn {
+  padding: 16px 32px;
+  font-size: 20px;
+  font-weight: 700;
+  border: 3px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  background-color: white;
+  color: var(--color-primary);
+  transition: all var(--transition-fast);
+}
+
+.symbol-btn:hover {
+  background-color: var(--color-primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.symbol-btn:active {
+  transform: translateY(0);
+}
+
+/* ====================
+   Game Board
+   ==================== */
+
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 450px;
+  width: 100%;
+  margin: 0 auto var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+/* ====================
+   Cell Styles
+   ==================== */
+
+.cell {
+  aspect-ratio: 1;
+  background: white;
+  border: 3px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.cell:hover:not(.x):not(.o) {
+  background-color: #ecf0f1;
+  transform: scale(1.05);
+}
+
+.cell:active {
+  transform: scale(0.98);
+}
+
+.cell.x,
+.cell.o {
+  cursor: default;
+}
+
+.cell.x {
+  color: #3498db;
+}
+
+.cell.o {
+  color: #e74c3c;
+}
+
+.cell.winning {
+  background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+  color: white;
+  animation: winningPulse 0.6s ease;
+  border-color: #27ae60;
+}
+
+@keyframes winningPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* ====================
+   Game Message
+   ==================== */
+
+.game-message {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.game-message p {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}
+
+/* ====================
+   Game Controls
+   ==================== */
+
+.game-controls {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  margin-top: var(--spacing-lg);
+}
+
+.game-controls button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--spacing-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+}
+
+.game-controls button:first-child {
+  background-color: var(--color-primary);
+  color: white;
+  border: 2px solid var(--color-primary);
+}
+
+.game-controls button:first-child:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.game-controls button:last-child {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.game-controls button:last-child:hover {
+  background-color: var(--color-primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ====================
+   Result Modal Specific
+   ==================== */
+
+.result-stats {
+  background-color: var(--color-background);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.stat-item:last-child {
+  border-bottom: none;
+}
+
+.stat-label {
+  font-size: 16px;
+  color: var(--color-text-light);
+  font-weight: 600;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+/* ====================
+   Responsive Design
+   ==================== */
+
+@media (max-width: 768px) {
+  .board-grid {
+    max-width: 350px;
+    gap: 10px;
+  }
+
+  .cell {
+    font-size: 48px;
+  }
+
+  .symbol-btn {
+    padding: 12px 24px;
+    font-size: 18px;
+  }
+
+  .game-stats {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .board-grid {
+    max-width: 300px;
+    gap: 8px;
+  }
+
+  .cell {
+    font-size: 40px;
+    border-width: 2px;
+  }
+
+  .symbol-buttons {
+    flex-direction: column;
+  }
+
+  .symbol-btn {
+    width: 100%;
+  }
+}

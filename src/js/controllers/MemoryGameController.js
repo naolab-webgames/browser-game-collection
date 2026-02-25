@@ -135,18 +135,14 @@ export default class MemoryGameController extends GameController {
    */
   createCardElement(value, index) {
     const card = document.createElement('div');
-    card.className = 'card';
+    card.className = 'memory-card';
     card.dataset.index = index;
     card.dataset.value = value;
 
     card.innerHTML = `
       <div class="card-inner">
-        <div class="card-back">
-          <span class="card-question">?</span>
-        </div>
-        <div class="card-front">
-          <span class="card-value">${value}</span>
-        </div>
+        <div class="card-back">?</div>
+        <div class="card-front">${value}</div>
       </div>
     `;
 

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Naolab Browser Game Collection - Get in touch with us for questions, feedback, or support.">
+  <title>Contact - Naolab Browser Game Collection</title>
+
+  <link rel="stylesheet" href="/src/css/common.css">
+  <link rel="stylesheet" href="/src/css/footer.css">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .legal-page {
+      flex: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--spacing-xl) var(--spacing-lg);
+      width: 100%;
+    }
+
+    .legal-page h1 {
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-md);
+      font-size: 32px;
+    }
+
+    .legal-page h2 {
+      color: var(--color-text);
+      margin-top: var(--spacing-xl);
+      margin-bottom: var(--spacing-md);
+      font-size: 24px;
+    }
+
+    .legal-page p, .legal-page li {
+      line-height: 1.8;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .legal-page ul {
+      padding-left: var(--spacing-xl);
+    }
+
+    .legal-page a {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    .legal-page a:hover {
+      color: var(--color-primary-dark);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: var(--spacing-lg);
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .contact-form-container {
+      background-color: var(--color-surface);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      margin: var(--spacing-xl) 0;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-lg);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+    }
+
+    .form-group label {
+      font-weight: 600;
+      color: var(--color-text);
+      font-size: 14px;
+    }
+
+    .form-group label .required {
+      color: #e74c3c;
+      margin-left: 2px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 12px;
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color var(--transition-fast);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .submit-button {
+      background-color: var(--color-primary);
+      color: white;
+      padding: 14px 32px;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      align-self: flex-start;
+    }
+
+    .submit-button:hover {
+      background-color: var(--color-primary-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .submit-button:active {
+      transform: translateY(0);
+    }
+
+    .info-box {
+      background-color: #e3f2fd;
+      border-left: 4px solid var(--color-primary);
+      padding: var(--spacing-md);
+      border-radius: var(--radius-sm);
+      margin: var(--spacing-lg) 0;
+    }
+
+    .info-box p {
+      margin: 0;
+      color: var(--color-text);
+      font-size: 14px;
+    }
+
+    .info-box strong {
+      color: var(--color-primary);
+    }
+  </style>
+</head>
+<body>
+  <main class="legal-page">
+    <a href="/index-module.html" class="back-link">← Back to Home</a>
+
+    <h1>Contact Us</h1>
+
+    <p>
+      Thank you for visiting Naolab Browser Game Collection! We'd love to hear from you.
+      Whether you have questions, feedback, bug reports, or suggestions for new games,
+      please fill out the form below.
+    </p>
+
+    <div class="contact-form-container">
+      <h3 style="color: var(--color-text); margin-bottom: var(--spacing-lg);">Send Us a Message</h3>
+
+      <!-- FormSubmit.co form -->
+      <!-- IMPORTANT: Replace YOUR-EMAIL-HERE with your actual email or encrypted endpoint -->
+      <!-- See README.md for setup instructions -->
+      <form action="https://formsubmit.co/labnaoto@gmail.com" method="POST" class="contact-form">
+        <!-- FormSubmit configuration -->
+        <input type="hidden" name="_subject" value="New Contact Form Submission - Naolab Browser Games">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+
+        <div class="form-group">
+          <label for="name">Your Name <span class="required">*</span></label>
+          <input type="text" id="name" name="name" required placeholder="Enter your full name">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Your Email <span class="required">*</span></label>
+          <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject <span class="required">*</span></label>
+          <select id="subject" name="subject" required>
+            <option value="">-- Select a topic --</option>
+            <option value="General Inquiry">General Inquiry</option>
+            <option value="Bug Report">Bug Report</option>
+            <option value="Feedback">Feedback / Suggestions</option>
+            <option value="Game Idea">New Game Idea</option>
+            <option value="Privacy Concern">Privacy Concern</option>
+            <option value="Advertising">Advertising Inquiry</option>
+            <option value="Partnership">Partnership Opportunity</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message <span class="required">*</span></label>
+          <textarea id="message" name="message" required placeholder="Please provide details about your inquiry..."></textarea>
+        </div>
+
+        <button type="submit" class="submit-button">Send Message</button>
+      </form>
+    </div>
+
+    <div class="info-box">
+      <p>
+        <strong>Note:</strong> This form is currently in setup mode. If you're the site owner,
+        please replace <code>YOUR-EMAIL-HERE</code> in the form action with your email address
+        or use FormSubmit's encrypted endpoint. See the README.md file for detailed setup instructions.
+      </p>
+    </div>
+
+    <h2>What You Can Contact Us About</h2>
+    <ul>
+      <li><strong>General Inquiries:</strong> Questions about our games or website</li>
+      <li><strong>Bug Reports:</strong> Technical issues or bugs you've encountered</li>
+      <li><strong>Feedback:</strong> Suggestions for improvements or new features</li>
+      <li><strong>Game Ideas:</strong> Proposals for new games to add to our collection</li>
+      <li><strong>Privacy Concerns:</strong> Questions about data collection and privacy</li>
+      <li><strong>Advertising:</strong> Inquiries related to advertisements on our site</li>
+      <li><strong>Partnerships:</strong> Collaboration or partnership opportunities</li>
+    </ul>
+
+    <h2>Response Time</h2>
+    <p>
+      We aim to respond to all inquiries within 2-3 business days. Please note that response times
+      may vary depending on the volume of inquiries we receive.
+    </p>
+
+    <h2>Before You Contact Us</h2>
+    <p>
+      Please check our <a href="/privacy-policy.html">Privacy Policy</a> and
+      <a href="/terms-of-service.html">Terms of Service</a> pages, as they may already
+      answer your questions.
+    </p>
+
+    <h2>Alternative Contact Methods</h2>
+    <p>
+      <strong>Operator:</strong> Naoto Lab<br>
+      <strong>Website:</strong> <a href="/index-module.html">Naolab Browser Game Collection</a>
+    </p>
+
+    <p style="margin-top: var(--spacing-xl); font-style: italic; color: var(--color-text-light);">
+      We appreciate your interest in Naolab Browser Game Collection and look forward to hearing from you!
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <nav class="footer-links">
+        <a href="/index-module.html">Home</a>
+        <span class="separator">|</span>
+        <a href="/about.html">About</a>
+        <span class="separator">|</span>
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <span class="separator">|</span>
+        <a href="/terms-of-service.html">Terms of Service</a>
+        <span class="separator">|</span>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <div class="footer-copyright">
+        &copy; 2026 <a href="/index-module.html">Naolab Browser Game Collection</a> by Naoto Lab. All rights reserved.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
