@@ -177,12 +177,11 @@
     <div class="contact-form-container">
       <h3 style="color: var(--color-text); margin-bottom: var(--spacing-lg);">Send Us a Message</h3>
 
-      <!-- FormSubmit.co form -->
-      <!-- IMPORTANT: Replace YOUR-EMAIL-HERE with your actual email or encrypted endpoint -->
-      <!-- See README.md for setup instructions -->
-      <form action="https://formsubmit.co/labnaoto@gmail.com" method="POST" class="contact-form">
-        <!-- FormSubmit configuration - MINIMAL for initial activation -->
+      <!-- Formspree.io form -->
+      <form action="https://formspree.io/f/xzdaywee" method="POST" class="contact-form">
+        <!-- Formspree configuration -->
         <input type="hidden" name="_subject" value="Contact from Naolab Browser Games">
+        <input type="hidden" name="_next" value="https://naolab-webgames.github.io/browser-game-collection/contact.html?success=true">
 
         <div class="form-group">
           <label for="name">Your Name <span class="required">*</span></label>

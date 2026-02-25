@@ -74,43 +74,35 @@ php -S localhost:8000
 http://localhost:8000/index-module.html
 ```
 
-4. (Optional) Set up the contact form:
+4. Contact form is already configured:
 
-The contact form uses [FormSubmit.co](https://formsubmit.co/) (free service) to handle form submissions without a backend server.
+The contact form uses [Formspree.io](https://formspree.io/) (free service) to handle form submissions without a backend server.
 
-**Setup Steps:**
+**Current Setup:**
+- Form endpoint: `https://formspree.io/f/xzdaywee`
+- Submissions go to: `labnaoto@gmail.com`
+- Monthly limit: 50 submissions (free plan)
+- No additional setup needed - ready to use!
 
-a. Open `contact.html` in a text editor
+**To create your own Formspree form:**
 
-b. Find this line (around line 183):
+a. Create a free account at [Formspree.io](https://formspree.io/)
+
+b. Create a new form in the dashboard
+
+c. Copy your form endpoint (e.g., `https://formspree.io/f/xxxxx`)
+
+d. Update `contact.html` line 183:
 ```html
-<form action="https://formsubmit.co/YOUR-EMAIL-HERE" method="POST" class="contact-form">
+<form action="https://formspree.io/f/YOUR-FORM-ID" method="POST" class="contact-form">
 ```
 
-c. Replace `YOUR-EMAIL-HERE` with your email address:
-```html
-<form action="https://formsubmit.co/your@email.com" method="POST" class="contact-form">
-```
-
-d. **First-time activation:**
-   - Deploy your site (see Deployment section below)
-   - Visit your contact page and submit a test message
-   - Check your email for a confirmation from FormSubmit
-   - Click the confirmation link to activate
-
-e. **(Optional) Use encrypted endpoint for privacy:**
-   - After activation, FormSubmit will provide an encrypted hash
-   - Replace the email in the form action with the hash:
-   ```html
-   <form action="https://formsubmit.co/a1b2c3d4..." method="POST">
-   ```
-   - This hides your email from the HTML source code
-
-**FormSubmit Features (included in the form):**
-- Spam protection (honeypot)
-- Email templates
-- Auto-reply to submitters
-- Completely free, no registration needed
+**Formspree Features:**
+- Spam protection (reCAPTCHA)
+- Email notifications
+- Form submissions dashboard
+- File uploads support
+- Custom redirect after submission
 
 ## 📁 Project Structure
 
