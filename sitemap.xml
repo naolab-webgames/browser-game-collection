@@ -2,59 +2,59 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Home Page -->
   <url>
-    <loc>https://yourdomain.com/index-module.html</loc>
-    <lastmod>2026-02-24</lastmod>
+    <loc>https://naolab-webgames.github.io/browser-game-collection/index-module.html</loc>
+    <lastmod>2026-02-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- Games -->
   <url>
-    <loc>https://yourdomain.com/games/memory-game-module.html</loc>
-    <lastmod>2026-02-24</lastmod>
+    <loc>https://naolab-webgames.github.io/browser-game-collection/games/memory-game-module.html</loc>
+    <lastmod>2026-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://yourdomain.com/games/tic-tac-toe-module.html</loc>
-    <lastmod>2026-02-24</lastmod>
+    <loc>https://naolab-webgames.github.io/browser-game-collection/games/tic-tac-toe-module.html</loc>
+    <lastmod>2026-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://yourdomain.com/games/whack-a-mole-module.html</loc>
-    <lastmod>2026-02-24</lastmod>
+    <loc>https://naolab-webgames.github.io/browser-game-collection/games/whack-a-mole-module.html</loc>
+    <lastmod>2026-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Legal Pages -->
   <url>
-    <loc>https://yourdomain.com/about.html</loc>
-    <lastmod>2026-02-24</lastmod>
+    <loc>https://naolab-webgames.github.io/browser-game-collection/about.html</loc>
+    <lastmod>2026-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://yourdomain.com/privacy-policy.html</loc>
-    <lastmod>2026-02-24</lastmod>
+    <loc>https://naolab-webgames.github.io/browser-game-collection/privacy-policy.html</loc>
+    <lastmod>2026-02-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://yourdomain.com/terms-of-service.html</loc>
-    <lastmod>2026-02-24</lastmod>
+    <loc>https://naolab-webgames.github.io/browser-game-collection/terms-of-service.html</loc>
+    <lastmod>2026-02-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://yourdomain.com/contact.html</loc>
-    <lastmod>2026-02-24</lastmod>
+    <loc>https://naolab-webgames.github.io/browser-game-collection/contact.html</loc>
+    <lastmod>2026-02-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>

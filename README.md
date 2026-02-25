@@ -2,7 +2,7 @@
 
 A collection of classic browser-based games built with modern web technologies. Play instantly in your browser - no downloads or installations required!
 
-🎮 **Live Demo**: [Replace with your deployed URL]
+🎮 **Live Demo**: [https://naolab-webgames.github.io/browser-game-collection/](https://naolab-webgames.github.io/browser-game-collection/index-module.html)
 
 ## 🎯 Features
 
