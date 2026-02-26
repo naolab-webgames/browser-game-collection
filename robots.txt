@@ -1,0 +1,8 @@
+# Robots.txt for Naolab Browser Game Collection
+# Allow all crawlers
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://naolab-webgames.github.io/browser-game-collection/sitemap.xml
