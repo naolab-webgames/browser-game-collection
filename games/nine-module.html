@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Play Nine, a strategic card game inspired by manga Ten. Use cards 1-9 wisely to outscore the CPU opponent. Free browser game, no download required.">
+  <meta name="keywords" content="nine card game, ten manga game, strategy card game, number cards, free online game, brain game, card strategy">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://naolab-webgames.github.io/browser-game-collection/games/nine-module.html">
+  <meta property="og:title" content="Nine - Strategic Card Game">
+  <meta property="og:description" content="Strategic card game inspired by manga Ten. Use cards 1-9 to outscore your opponent in this brain-teasing game!">
+  <meta property="og:image" content="https://naolab-webgames.github.io/browser-game-collection/src/assets/images/thumbnails/nine-game.svg">
+  <meta property="og:site_name" content="Naolab Browser Games">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://naolab-webgames.github.io/browser-game-collection/games/nine-module.html">
+  <meta name="twitter:title" content="Nine - Strategic Card Game">
+  <meta name="twitter:description" content="Strategic card game inspired by manga Ten. Use cards 1-9 to outscore your opponent in this brain-teasing game!">
+  <meta name="twitter:image" content="https://naolab-webgames.github.io/browser-game-collection/src/assets/images/thumbnails/nine-game.svg">
+
+  <title>Nine - Naolab's Browser Games</title>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4826094295702322"
+     crossorigin="anonymous"></script>
+
+  <!-- Structured Data (Schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Nine",
+    "description": "Strategic card game where players use cards numbered 1-9 to outscore opponents. Inspired by the card game from manga Ten.",
+    "url": "https://naolab-webgames.github.io/browser-game-collection/games/nine-module.html",
+    "image": "https://naolab-webgames.github.io/browser-game-collection/src/assets/images/thumbnails/nine-game.svg",
+    "gamePlatform": "Web Browser",
+    "genre": "Strategy",
+    "playMode": "SinglePlayer",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Naoto Lab"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="/browser-game-collection/src/css/common.css">
+  <link rel="stylesheet" href="/browser-game-collection/src/css/games/nine-game.css">
+  <link rel="stylesheet" href="/browser-game-collection/src/css/footer.css">
+</head>
+<body>
+  <div class="nine-game">
+    <header class="game-header">
+      <h2>Nine - Strategic Card Game</h2>
+      <div class="game-stats">
+        <div class="stat-item">
+          <span class="stat-label">Your Score</span>
+          <span class="stat-value" id="player-score">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">CPU Score</span>
+          <span class="stat-value" id="cpu-score">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Best</span>
+          <span class="stat-value" id="high-score-value">--</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Turn Display -->
+    <div class="turn-display" id="turn-display">Turn 1/9 - Your turn</div>
+
+    <!-- Game Board -->
+    <div class="game-board">
+      <!-- CPU Cards Section -->
+      <div class="cpu-section">
+        <h3>CPU Cards</h3>
+        <div class="cpu-cards" id="cpu-cards">
+          <div class="nine-card" data-value="1">?</div>
+          <div class="nine-card" data-value="2">?</div>
+          <div class="nine-card" data-value="3">?</div>
+          <div class="nine-card" data-value="4">?</div>
+          <div class="nine-card" data-value="5">?</div>
+          <div class="nine-card" data-value="6">?</div>
+          <div class="nine-card" data-value="7">?</div>
+          <div class="nine-card" data-value="8">?</div>
+          <div class="nine-card" data-value="9">?</div>
+        </div>
+      </div>
+
+      <!-- Result Display Area -->
+      <div class="result-display-container">
+        <div class="result-display" id="result-display">
+          Select a card and click Confirm!
+        </div>
+      </div>
+
+      <!-- Player Cards Section -->
+      <div class="player-section">
+        <h3>Your Cards</h3>
+        <div class="player-cards" id="player-cards">
+          <div class="nine-card red" data-value="1">1</div>
+          <div class="nine-card black" data-value="2">2</div>
+          <div class="nine-card red" data-value="3">3</div>
+          <div class="nine-card black" data-value="4">4</div>
+          <div class="nine-card red" data-value="5">5</div>
+          <div class="nine-card black" data-value="6">6</div>
+          <div class="nine-card red" data-value="7">7</div>
+          <div class="nine-card black" data-value="8">8</div>
+          <div class="nine-card red" data-value="9">9</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Controls -->
+    <div class="game-controls">
+      <button id="confirm-btn" disabled>Confirm Selection</button>
+      <button id="new-game-btn">New Game</button>
+      <button id="back-btn">Back to Home</button>
+    </div>
+  </div>
+
+  <!-- Result Modal -->
+  <div id="result-modal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <h2 class="modal-title">Game Over!</h2>
+      <div class="modal-body"></div>
+      <div class="modal-buttons"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <nav class="footer-links">
+        <a href="/browser-game-collection/index-module.html">Home</a>
+        <span class="separator">|</span>
+        <a href="/browser-game-collection/about.html">About</a>
+        <span class="separator">|</span>
+        <a href="/browser-game-collection/privacy-policy.html">Privacy Policy</a>
+        <span class="separator">|</span>
+        <a href="/browser-game-collection/terms-of-service.html">Terms of Service</a>
+        <span class="separator">|</span>
+        <a href="/browser-game-collection/contact.html">Contact</a>
+      </nav>
+      <div class="footer-copyright">
+        &copy; 2026 <a href="/browser-game-collection/index-module.html">Naolab Browser Game Collection</a> by Naoto Lab. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import NineGameController from '/browser-game-collection/src/js/controllers/NineGameController.js';
+    import { gameDataService } from '/browser-game-collection/src/js/core/GameDataService.js';
+
+    const controller = new NineGameController(gameDataService);
+    controller.init();
+  </script>
+</body>
+</html>

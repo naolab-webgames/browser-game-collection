@@ -112,6 +112,35 @@ class GameDataService {
   loadWhackAMoleHighScore() {
     return this.storage.loadNumber('whack-a-mole_highscore', 0);
   }
+
+  // ====================
+  // Nine Game Methods
+  // ====================
+
+  /**
+   * Save Nine Game score
+   * @param {number} score - Score achieved
+   * @returns {boolean} True if new high score (higher is better)
+   */
+  saveNineGameScore(score) {
+    const currentBest = this.loadNineGameHighScore();
+
+    // Higher is better for Nine Game
+    if (currentBest === null || score > currentBest) {
+      this.storage.save('nine-game_highscore', score);
+      return true;  // New high score!
+    }
+
+    return false;  // Not a new record
+  }
+
+  /**
+   * Load Nine Game high score
+   * @returns {number|null} High score or null if no score saved
+   */
+  loadNineGameHighScore() {
+    return this.storage.loadNumber('nine-game_highscore', null);
+  }
 }
 
 // Export singleton instance
