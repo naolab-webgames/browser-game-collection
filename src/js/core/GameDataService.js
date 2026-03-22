@@ -141,6 +141,35 @@ class GameDataService {
   loadNineGameHighScore() {
     return this.storage.loadNumber('nine-game_highscore', null);
   }
+
+  // ====================
+  // Runner Game Methods
+  // ====================
+
+  /**
+   * Save Runner Game score (distance in meters)
+   * @param {number} distance - Distance achieved in meters
+   * @returns {boolean} True if new high score (higher is better)
+   */
+  saveRunnerGameScore(distance) {
+    const currentBest = this.loadRunnerGameHighScore();
+
+    // Higher is better for Runner Game (longest distance)
+    if (currentBest === null || distance > currentBest) {
+      this.storage.save('runner-game_highscore', distance);
+      return true;  // New high score!
+    }
+
+    return false;  // Not a new record
+  }
+
+  /**
+   * Load Runner Game high score
+   * @returns {number|null} High score (longest distance) or null if no score saved
+   */
+  loadRunnerGameHighScore() {
+    return this.storage.loadNumber('runner-game_highscore', null);
+  }
 }
 
 // Export singleton instance

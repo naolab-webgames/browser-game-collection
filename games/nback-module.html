@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Train your working memory with Dual N-Back! Remember both position and number from N steps back. Choose your difficulty and improve your cognitive skills!">
+  <meta name="keywords" content="n-back, dual n-back, memory training, brain training, cognitive game, working memory, concentration game, free online game, browser game">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://naolab-webgames.github.io/browser-game-collection/games/nback-module.html">
+  <meta property="og:title" content="Dual N-Back Game - Train Your Memory">
+  <meta property="og:description" content="Challenge your working memory! Remember both position and number from N steps back in this cognitive training game.">
+  <meta property="og:image" content="https://naolab-webgames.github.io/browser-game-collection/src/assets/images/thumbnails/nback-game.svg">
+  <meta property="og:site_name" content="Naolab Browser Games">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://naolab-webgames.github.io/browser-game-collection/games/nback-module.html">
+  <meta name="twitter:title" content="Dual N-Back Game - Train Your Memory">
+  <meta name="twitter:description" content="Challenge your working memory! Remember both position and number from N steps back in this cognitive training game.">
+  <meta name="twitter:image" content="https://naolab-webgames.github.io/browser-game-collection/src/assets/images/thumbnails/nback-game.svg">
+
+  <title>Dual N-Back Game - Naolab's Browser Games</title>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4826094295702322"
+     crossorigin="anonymous"></script>
+
+  <!-- Structured Data (Schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Dual N-Back Game",
+    "description": "Memory training game where players remember both position and number from N steps back. Includes Easy, Normal, and Hard difficulty levels.",
+    "url": "https://naolab-webgames.github.io/browser-game-collection/games/nback-module.html",
+    "image": "https://naolab-webgames.github.io/browser-game-collection/src/assets/images/thumbnails/nback-game.svg",
+    "gamePlatform": "Web Browser",
+    "genre": "Puzzle",
+    "playMode": "SinglePlayer",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Naoto Lab"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="/browser-game-collection/src/css/common.css">
+  <link rel="stylesheet" href="/browser-game-collection/src/css/games/nback-game.css">
+  <link rel="stylesheet" href="/browser-game-collection/src/css/footer.css">
+</head>
+<body>
+  <div class="nback-game">
+    <!-- Difficulty Selection Screen -->
+    <div id="difficulty-screen" class="difficulty-screen">
+      <h3>Choose Difficulty</h3>
+      <p>Select how many steps back you want to remember:</p>
+      <div class="difficulty-buttons">
+        <button id="easy-btn" class="difficulty-btn">
+          <span class="btn-title">Easy - 1-Back</span>
+          <span class="btn-description">Remember 1 step back (Beginner)</span>
+        </button>
+        <button id="normal-btn" class="difficulty-btn">
+          <span class="btn-title">Normal - 2-Back</span>
+          <span class="btn-description">Remember 2 steps back (Standard)</span>
+        </button>
+        <button id="hard-btn" class="difficulty-btn">
+          <span class="btn-title">Hard - 3-Back</span>
+          <span class="btn-description">Remember 3 steps back (Expert)</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="hidden">
+      <header class="game-header">
+        <h2>Dual N-Back</h2>
+        <div class="game-stats">
+          <div class="stat-item">
+            <span class="stat-label">Difficulty</span>
+            <span class="stat-value" id="difficulty-value">Normal</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Time</span>
+            <span class="stat-value" id="timer-value">30s</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Game Container -->
+      <div class="game-container">
+        <!-- 3x3 Grid -->
+        <div class="grid-container">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+
+        <!-- Control Buttons -->
+        <div class="control-buttons">
+          <button id="position-match-btn" class="match-btn" disabled>
+            <span class="btn-label">Position Match</span>
+            <span class="btn-key">Press P or A</span>
+          </button>
+          <button id="number-match-btn" class="match-btn" disabled>
+            <span class="btn-label">Number Match</span>
+            <span class="btn-key">Press N or L</span>
+          </button>
+        </div>
+
+        <!-- Instructions -->
+        <div class="game-instructions">
+          <h4>How to Play</h4>
+          <ul>
+            <li>Watch the grid as positions light up with numbers</li>
+            <li>Press "Position Match" if the position matches N steps back</li>
+            <li>Press "Number Match" if the number matches N steps back</li>
+            <li>You can press both buttons if both match!</li>
+            <li>Game lasts 30 seconds - try to get the highest accuracy!</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Game Controls -->
+      <div class="game-controls">
+        <button id="new-game-btn">New Game</button>
+        <button id="back-btn">Back to Home</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Result Modal -->
+  <div id="result-modal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <h2 class="modal-title">Game Complete!</h2>
+      <div class="modal-body"></div>
+      <div class="modal-buttons"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <nav class="footer-links">
+        <a href="/browser-game-collection/index-module.html">Home</a>
+        <span class="separator">|</span>
+        <a href="/browser-game-collection/about.html">About</a>
+        <span class="separator">|</span>
+        <a href="/browser-game-collection/privacy-policy.html">Privacy Policy</a>
+        <span class="separator">|</span>
+        <a href="/browser-game-collection/terms-of-service.html">Terms of Service</a>
+        <span class="separator">|</span>
+        <a href="/browser-game-collection/contact.html">Contact</a>
+      </nav>
+      <div class="footer-copyright">
+        &copy; 2026 <a href="/browser-game-collection/index-module.html">Naolab Browser Game Collection</a> by Naoto Lab. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import NBackGameController from '/browser-game-collection/src/js/controllers/NBackGameController.js';
+    import { gameDataService } from '/browser-game-collection/src/js/core/GameDataService.js';
+
+    const controller = new NBackGameController(gameDataService);
+    controller.init();
+  </script>
+</body>
+</html>

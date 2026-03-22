@@ -49,11 +49,15 @@ export function createGameCard(game, highScore, onClick) {
 
 /**
  * Render difficulty stars
- * @param {string} difficulty - "easy", "medium", or "hard"
+ * @param {string} difficulty - "easy", "normal", "medium", "hard", or range like "easy - hard"
  * @returns {string} HTML string with stars
  */
 function renderDifficulty(difficulty) {
-  const levels = { easy: 1, medium: 2, hard: 3 };
+  // Handle range difficulty (e.g. "easy - hard")
+  if (difficulty && difficulty.includes(' - ')) {
+    return `<span class="stars">★☆☆～★★★</span> ${capitalize(difficulty)}`;
+  }
+  const levels = { easy: 1, normal: 2, medium: 2, hard: 3 };
   const stars = levels[difficulty] || 1;
   const filled = '★'.repeat(stars);
   const empty = '☆'.repeat(3 - stars);
@@ -87,6 +91,16 @@ function formatHighScore(gameId, highScore) {
   // Whack-a-Mole: higher is better (points)
   if (gameId === 'whack-a-mole') {
     return `${highScore} pts`;
+  }
+
+  // Number Nine: lower is better (moves)
+  if (gameId === 'number-nine') {
+    return `${highScore} moves`;
+  }
+
+  // Runner Game: higher is better (distance in meters)
+  if (gameId === 'runner-game') {
+    return `${highScore}m`;
   }
 
   return String(highScore);

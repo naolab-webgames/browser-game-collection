@@ -151,6 +151,19 @@ export default class TopPageController {
           console.log(`Whack-a-Mole high score:`, highScore);
           return highScore;
 
+        case 'number-nine':
+          highScore = this.gameDataService.loadNineGameHighScore();
+          console.log(`Number Nine high score:`, highScore);
+          return highScore;
+
+        case 'runner-game':
+          highScore = this.gameDataService.loadRunnerGameHighScore();
+          console.log(`Runner Game high score:`, highScore);
+          return highScore;
+
+        case 'nback-game':
+          return null; // No high score for N-Back Game
+
         default:
           return null;
       }

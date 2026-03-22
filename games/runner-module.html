@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Play Runner Game, an exciting endless runner where you jump over obstacles and pits. Test your reflexes and reach the 500m goal! Free browser game.">
+  <meta name="keywords" content="runner game, endless runner, jumping game, obstacle course, action game, free online game, browser game, stickman game">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://naolab-webgames.github.io/browser-game-collection/games/runner-module.html">
+  <meta property="og:title" content="Runner Game - Jump and Run to the Goal">
+  <meta property="og:description" content="Fast-paced running game! Jump over obstacles, avoid pits, and reach the 500m goal!">
+  <meta property="og:image" content="https://naolab-webgames.github.io/browser-game-collection/src/assets/images/thumbnails/runner-game.svg">
+  <meta property="og:site_name" content="Naolab Browser Games">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://naolab-webgames.github.io/browser-game-collection/games/runner-module.html">
+  <meta name="twitter:title" content="Runner Game - Jump and Run to the Goal">
+  <meta name="twitter:description" content="Fast-paced running game! Jump over obstacles, avoid pits, and reach the 500m goal!">
+  <meta name="twitter:image" content="https://naolab-webgames.github.io/browser-game-collection/src/assets/images/thumbnails/runner-game.svg">
+
+  <title>Runner Game - Naolab's Browser Games</title>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4826094295702322"
+     crossorigin="anonymous"></script>
+
+  <!-- Structured Data (Schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Runner Game",
+    "description": "Horizontal scrolling action game where players control a stickman to jump over obstacles and reach the 500m goal.",
+    "url": "https://naolab-webgames.github.io/browser-game-collection/games/runner-module.html",
+    "image": "https://naolab-webgames.github.io/browser-game-collection/src/assets/images/thumbnails/runner-game.svg",
+    "gamePlatform": "Web Browser",
+    "genre": "Action",
+    "playMode": "SinglePlayer",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Naoto Lab"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="/browser-game-collection/src/css/common.css">
+  <link rel="stylesheet" href="/browser-game-collection/src/css/games/runner-game.css">
+  <link rel="stylesheet" href="/browser-game-collection/src/css/footer.css">
+</head>
+<body>
+  <div class="runner-game">
+    <header class="game-header">
+      <h2>Runner Game</h2>
+      <div class="game-stats">
+        <div class="stat-item">
+          <span class="stat-label">Distance</span>
+          <span class="stat-value" id="distance-value">0m</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Best</span>
+          <span class="stat-value" id="best-value">--</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Goal</span>
+          <span class="stat-value" id="remaining-value">500m</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Canvas Container -->
+    <div class="canvas-container">
+      <canvas id="game-canvas"></canvas>
+    </div>
+
+    <!-- Game Controls -->
+    <div class="game-controls">
+      <button id="new-game-btn">New Game</button>
+      <button id="back-btn">Back to Home</button>
+    </div>
+
+    <!-- Instructions -->
+    <div class="game-instructions">
+      <h3>How to Play</h3>
+      <ul>
+        <li>Press SPACE or Click to jump</li>
+        <li>Jump over obstacles (rocks, pits, steps)</li>
+        <li>Avoid flying birds (jump or duck under them)</li>
+        <li>Reach the 500m goal to win!</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Result Modal -->
+  <div id="result-modal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <h2 class="modal-title">Game Over!</h2>
+      <div class="modal-body"></div>
+      <div class="modal-buttons"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <nav class="footer-links">
+        <a href="/browser-game-collection/index-module.html">Home</a>
+        <span class="separator">|</span>
+        <a href="/browser-game-collection/about.html">About</a>
+        <span class="separator">|</span>
+        <a href="/browser-game-collection/privacy-policy.html">Privacy Policy</a>
+        <span class="separator">|</span>
+        <a href="/browser-game-collection/terms-of-service.html">Terms of Service</a>
+        <span class="separator">|</span>
+        <a href="/browser-game-collection/contact.html">Contact</a>
+      </nav>
+      <div class="footer-copyright">
+        &copy; 2026 <a href="/browser-game-collection/index-module.html">Naolab Browser Game Collection</a> by Naoto Lab. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import RunnerGameController from '/browser-game-collection/src/js/controllers/RunnerGameController.js';
+    import { gameDataService } from '/browser-game-collection/src/js/core/GameDataService.js';
+
+    const controller = new RunnerGameController(gameDataService);
+    controller.init();
+  </script>
+</body>
+</html>

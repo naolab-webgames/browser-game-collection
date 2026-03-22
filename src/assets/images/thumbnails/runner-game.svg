@@ -1,0 +1,58 @@
+<svg width="380" height="214" viewBox="0 0 380 214" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background (Sky and Ground) -->
+  <rect width="380" height="140" fill="#87CEEB"/>
+  <rect y="140" width="380" height="74" fill="#8B4513"/>
+
+  <!-- Clouds -->
+  <ellipse cx="60" cy="40" rx="20" ry="12" fill="#FFFFFF" opacity="0.8"/>
+  <ellipse cx="80" cy="40" rx="25" ry="15" fill="#FFFFFF" opacity="0.8"/>
+  <ellipse cx="100" cy="40" rx="20" ry="12" fill="#FFFFFF" opacity="0.8"/>
+
+  <ellipse cx="280" cy="60" rx="18" ry="10" fill="#FFFFFF" opacity="0.8"/>
+  <ellipse cx="298" cy="60" rx="22" ry="13" fill="#FFFFFF" opacity="0.8"/>
+  <ellipse cx="316" cy="60" rx="18" ry="10" fill="#FFFFFF" opacity="0.8"/>
+
+  <!-- Ground line -->
+  <line x1="0" y1="140" x2="380" y2="140" stroke="#654321" stroke-width="2"/>
+
+  <!-- Obstacles (Rock and Pit) -->
+  <!-- Rock 1 -->
+  <rect x="200" y="110" width="30" height="30" fill="#696969" rx="4"/>
+
+  <!-- Pit -->
+  <rect x="280" y="140" width="40" height="30" fill="#000000"/>
+
+  <!-- Rock 2 -->
+  <rect x="350" y="115" width="25" height="25" fill="#696969" rx="4"/>
+
+  <!-- Stickman Runner (in mid-run pose) -->
+  <g transform="translate(80, 90)">
+    <!-- Head -->
+    <circle cx="0" cy="0" r="8" fill="none" stroke="#000000" stroke-width="3"/>
+
+    <!-- Body -->
+    <line x1="0" y1="8" x2="0" y2="28" stroke="#000000" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- Arms (running pose) -->
+    <line x1="0" y1="14" x2="-10" y2="22" stroke="#000000" stroke-width="3" stroke-linecap="round"/>
+    <line x1="0" y1="14" x2="10" y2="18" stroke="#000000" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- Legs (running pose - one forward, one back) -->
+    <line x1="0" y1="28" x2="-8" y2="45" stroke="#000000" stroke-width="3" stroke-linecap="round"/>
+    <line x1="0" y1="28" x2="8" y2="38" stroke="#000000" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- Motion lines (to show running) -->
+  <line x1="45" y1="105" x2="60" y2="105" stroke="#000000" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
+  <line x1="50" y1="115" x2="65" y2="115" stroke="#000000" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
+  <line x1="48" y1="125" x2="63" y2="125" stroke="#000000" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
+
+  <!-- Distance marker -->
+  <rect x="10" y="10" width="100" height="30" fill="#FFFFFF" opacity="0.9" rx="6"/>
+  <text x="60" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#3498db" text-anchor="middle">250m</text>
+
+  <!-- Game title -->
+  <rect x="0" y="160" width="380" height="54" fill="#000000" opacity="0.7"/>
+  <text x="190" y="185" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#FFFFFF" text-anchor="middle">RUNNER</text>
+  <text x="190" y="205" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#FFFFFF" text-anchor="middle">Jump and Run to the Goal!</text>
+</svg>

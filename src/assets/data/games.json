@@ -32,6 +32,39 @@
       "category": "action",
       "htmlPath": "/browser-game-collection/games/whack-a-mole-module.html",
       "enabled": true
+    },
+    {
+      "id": "number-nine",
+      "title": "Number Nine",
+      "description": "Place numbers 1-9 in a 3x3 grid. Each number can only appear once — think carefully!",
+      "thumbnail": "/browser-game-collection/src/assets/images/thumbnails/nine-game.svg",
+      "difficulty": "normal",
+      "estimatedTime": "1-2 minutes",
+      "category": "strategy",
+      "htmlPath": "/browser-game-collection/games/nine-module.html",
+      "enabled": true
+    },
+    {
+      "id": "runner-game",
+      "title": "Runner Game",
+      "description": "Jump over rocks, dodge birds, and avoid pits! Run all the way to the 500m goal!",
+      "thumbnail": "/browser-game-collection/src/assets/images/thumbnails/runner-game.svg",
+      "difficulty": "normal",
+      "estimatedTime": "1-2 minutes",
+      "category": "action",
+      "htmlPath": "/browser-game-collection/games/runner-module.html",
+      "enabled": true
+    },
+    {
+      "id": "nback-game",
+      "title": "N-Back Game",
+      "description": "Train your working memory! Remember both position and number from N steps back.",
+      "thumbnail": "/browser-game-collection/src/assets/images/thumbnails/nback-game.svg",
+      "difficulty": "easy - hard",
+      "estimatedTime": "1 minute",
+      "category": "brain-training",
+      "htmlPath": "/browser-game-collection/games/nback-module.html",
+      "enabled": true
     }
   ]
 }
